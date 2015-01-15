@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="450px"
+        android:layout_height="450px"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/img"/>
+
+    <ImageButton
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:text="Restart"
+        android:id="@+id/restart"
+        android:layout_gravity="right"
+        android:onClick="restart"
+        android:layout_marginTop="-70px"
+        android:layout_marginRight="30px"
+        android:src="@drawable/reload" />
+
+    <SeekBar
+        android:layout_width="279dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/radius"
+        android:layout_gravity="center_horizontal"
+        android:max="5"
+        android:layout_marginTop="20px" />
+</LinearLayout>
