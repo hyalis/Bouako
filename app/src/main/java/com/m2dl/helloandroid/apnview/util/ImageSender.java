@@ -25,12 +25,12 @@ public abstract class ImageSender {
 
     public abstract void sendImage();
 
-    public File savebitmap(Bitmap image) {
+    public File saveBitmapToFile(Bitmap image) {
 
         String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
         OutputStream outStream = null;
         Random r = new Random();
-        String fileName = "imageTemp";
+        String fileName = this.imageType.replace(" ", "_") +"_"+ r.nextInt(9999);
 
         File file = new File(extStorageDirectory, fileName + ".png");
 
