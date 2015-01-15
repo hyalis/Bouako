@@ -32,9 +32,9 @@ public class FormActivity extends Activity {
         y = 450/2;
 
         this.img = (ImageView) findViewById(R.id.img);
-        this.originalImg = ImgAPN.imgBitmap;
-        this.imgBlur = bf.fastblur(ImgAPN.imgBitmap, 25);
-        this.imgCircle = bf.getCroppedBitmap(ImgAPN.imgBitmap, x, y, radius);
+        this.originalImg = StaticData.imgBitmap;
+        this.imgBlur = bf.fastblur(StaticData.imgBitmap, 25);
+        this.imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radius);
         this.imgFocus = bf.overlay(imgBlur, imgCircle);
 
         img.setImageBitmap(imgFocus);
@@ -86,13 +86,13 @@ public class FormActivity extends Activity {
     }
 
     public void redrawImg() {
-        imgCircle = bf.getCroppedBitmap(ImgAPN.imgBitmap, x, y, radius);
+        imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radius);
         imgFocus = bf.overlay(imgBlur, imgCircle);
         img.setImageBitmap(imgFocus);
     }
 
     public void restart(View v){
-        Intent intent = new Intent(FormActivity.this, ApnView.class);
+        Intent intent = new Intent(FormActivity.this, ApnViewActivity.class);
         startActivity(intent);
         finish();
     }

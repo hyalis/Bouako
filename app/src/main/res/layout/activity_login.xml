@@ -10,7 +10,7 @@
         android:inputType="textPersonName"
         android:text="Enter your username"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/login"
         android:layout_centerVertical="true"
         android:background="#ff2abeff"
         android:padding="20px"

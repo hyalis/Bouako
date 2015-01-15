@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.m2dl.helloandroid.apnview.ApnView"
+            android:name="com.m2dl.helloandroid.apnview.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -39,8 +39,13 @@
         </activity>
         <activity
             android:name="com.m2dl.helloandroid.apnview.FormActivity"
-            android:label="@string/title_activity_form" >
+            android:label="FormActivity" >
         </activity>
+        <activity
+            android:name="com.m2dl.helloandroid.apnview.ApnViewActivity"
+            android:label="ApnViewActivity" >
+        </activity>
+
     </application>
 
 </manifest>

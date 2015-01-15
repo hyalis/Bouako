@@ -28,4 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile files('C:/Users/T430/AndroidStudioProjects/Bouako/libs/jdom-2.0.5.jar')
     compile files('C:/Users/T430/AndroidStudioProjects/Bouako/libs/backgroundmaillibrary.jar')
+    compile files('C:/Users/Hyalis/Documents/NDI/APNView/libs/backgroundmaillibrary.jar')
+    compile files('C:/Users/Hyalis/Documents/NDI/APNView/libs/jdom-2.0.5.jar')
 }

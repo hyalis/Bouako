@@ -10,14 +10,12 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.app.Activity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.camera1.R;
 
-public class ApnView extends Activity {
+public class ApnViewActivity extends Activity {
 
     private Camera cameraObject;
     private ShowCamera showCamera;
@@ -44,12 +42,12 @@ public class ApnView extends Activity {
                 @Override
                 public void run() {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data .length);
-                    ImgAPN.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
-                    ImgAPN.imgBitmap = bf.rotateBitmap(ImgAPN.imgBitmap, 90);
+                    StaticData.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
+                    StaticData.imgBitmap = bf.rotateBitmap(StaticData.imgBitmap, 90);
 
                     cameraObject.release();
 
-                    Intent intent = new Intent(ApnView.this, FormActivity.class);
+                    Intent intent = new Intent(ApnViewActivity.this, FormActivity.class);
                     startActivity(intent);
                     finish();
                 }

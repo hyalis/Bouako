@@ -1,14 +1,16 @@
 package com.m2dl.helloandroid.apnview;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.camera1.R;
-import com.m2dl.helloandroid.apnview.util.XmlParser;
 
 public class LoginActivity extends Activity {
     private ImageButton confirm;
@@ -25,7 +27,12 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
 
                 Toast.makeText(LoginActivity.this, "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
-                new XmlParser(LoginActivity.this).getTypesAndSousTypes();
+                //new XmlParser(LoginActivity.this).getTypesAndSousTypes();
+                StaticData.login = ((EditText)findViewById(R.id.login)).getText().toString();
+                Log.e("Login", "Login user = " + StaticData.login);
+                Intent intent = new Intent(LoginActivity.this, ApnViewActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         });
