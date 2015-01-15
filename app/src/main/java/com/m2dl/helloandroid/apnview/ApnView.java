@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.camera1.R;
@@ -21,6 +22,9 @@ public class ApnView extends Activity {
     private Camera cameraObject;
     private ShowCamera showCamera;
     private BitmapFunction bf = new BitmapFunction();
+    private LinearLayout apnPreview;
+    private TextView message;
+
     public static Camera isCameraAvailiable(){
         Camera object = null;
         try {
@@ -34,22 +38,23 @@ public class ApnView extends Activity {
     private PictureCallback capturedIt = new PictureCallback() {
 
         @Override
-        public void onPictureTaken(byte[] data, Camera camera) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data .length);
-            ImgAPN.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
-            ImgAPN.imgBitmap = bf.rotateBitmap(ImgAPN.imgBitmap, 90);
+        public void onPictureTaken(final byte[] data, Camera camera) {
 
-            if(bitmap==null){
-                Toast.makeText(getApplicationContext(), "not taken", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(getApplicationContext(), "taken", Toast.LENGTH_SHORT).show();
-            }
-            cameraObject.release();
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data .length);
+                    ImgAPN.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
+                    ImgAPN.imgBitmap = bf.rotateBitmap(ImgAPN.imgBitmap, 90);
 
-            Intent intent = new Intent(ApnView.this, FormActivity.class);
-            startActivity(intent);
-            finish();
+                    cameraObject.release();
+
+                    Intent intent = new Intent(ApnView.this, FormActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            };
+            thread.start();
         }
     };
 
@@ -57,12 +62,17 @@ public class ApnView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apn_view);
+        this.apnPreview = (LinearLayout) findViewById(R.id.apnPreview);
+        this.message = (TextView) findViewById(R.id.message);
+
         cameraObject = isCameraAvailiable();
         showCamera = new ShowCamera(this, cameraObject);
         LinearLayout preview = (LinearLayout) findViewById(R.id.camera_preview);
         preview.addView(showCamera);
     }
     public void snapIt(View view){
+        this.apnPreview.setVisibility(View.GONE);
+        this.message.setText("Patientez...");
         cameraObject.takePicture(null, null, capturedIt);
     }
 

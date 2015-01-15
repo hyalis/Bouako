@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#C5FFFC">
 
     <ImageView
         android:layout_width="450px"
@@ -12,18 +13,22 @@
         android:id="@+id/img"/>
 
     <ImageButton
-        android:layout_width="50px"
-        android:layout_height="50px"
-        android:text="Restart"
+        android:layout_width="60px"
+        android:layout_height="60px"
         android:id="@+id/restart"
         android:layout_gravity="right"
         android:onClick="restart"
-        android:layout_marginTop="-70px"
-        android:layout_marginRight="30px"
-        android:src="@drawable/reload" />
+        android:layout_marginTop="-91px"
+        android:layout_marginRight="45px"
+        android:src="@drawable/restart"
+        android:padding="7px"
+        android:background="@null"
+        android:scaleType="fitCenter"/>
+
+
 
     <SeekBar
-        android:layout_width="279dp"
+        android:layout_width="450px"
         android:layout_height="wrap_content"
         android:id="@+id/radius"
         android:layout_gravity="center_horizontal"

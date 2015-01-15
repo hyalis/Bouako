@@ -38,6 +38,7 @@ public class BitmapFunction {
     }
 
     public Bitmap getCroppedBitmap(Bitmap bitmap, int x, int y, int radius) {
+        radius = Math.abs(radius-5);
         radius = (radius + 1) * 2;
 
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),

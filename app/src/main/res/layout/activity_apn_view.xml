@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/back">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,15 +21,28 @@
             android:layout_gravity="center_horizontal|top">
 
         </LinearLayout>
-        <Button
+        <ImageButton
+            android:src="@drawable/camera"
             android:id="@+id/button_capture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100px"
+            android:layout_height="100px"
             android:onClick="snapIt"
-            android:text="@string/Capture"
-            android:layout_gravity="center_horizontal|bottom" />
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="-135px"
+            android:padding="7px"
+            android:background="@null"
+            android:scaleType="fitCenter"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Prenez votre sujet en photo !"
+        android:id="@+id/message"
+        android:gravity="center"
+        android:layout_gravity="center" />
 
 
 </LinearLayout>
