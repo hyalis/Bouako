@@ -36,7 +36,7 @@
         android:layout_marginTop="20px" />
 
     <include layout="@layout/imageinfos"
-        android:layout_marginTop="30px"
+        android:layout_marginTop="10px"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="260px" />
 </LinearLayout>

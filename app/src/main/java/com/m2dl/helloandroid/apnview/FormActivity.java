@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.camera1.R;
@@ -26,6 +28,9 @@ public class FormActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         SeekBar sk = (SeekBar) findViewById(R.id.radius);
+
+        EditText commEditText = (EditText)findViewById(R.id.commentaire);
+        commEditText.setTypeface(StaticData.myTypeface);
 
         radiusValue = 2;
         sk.setProgress(radiusValue);

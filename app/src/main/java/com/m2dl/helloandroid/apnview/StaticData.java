@@ -2,6 +2,7 @@ package com.m2dl.helloandroid.apnview;
 
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.widget.Switch;
 
 /**
  * Created by Hyalis on 15/01/2015.

@@ -2,11 +2,14 @@ package com.m2dl.helloandroid.apnview;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
+import android.graphics.Shader;
 
 /**
  * Created by Hyalis on 15/01/2015.
@@ -50,11 +53,12 @@ public class BitmapFunction {
         final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         paint.setAntiAlias(true);
+
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
+
         // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-        canvas.drawCircle(x, y,
-                bitmap.getWidth() / radius, paint);
+        canvas.drawCircle(x, y, bitmap.getWidth() / radius, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
         //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
