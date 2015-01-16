@@ -96,19 +96,20 @@ public class ApnViewActivity extends Activity {
         valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
 
         typesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked)
-                {
-                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
-                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
-                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                } else
-                {
-                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
-                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
-                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                }
-                valuesSwitch.invalidate();
+                    if(!isChecked)
+                    {
+                        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+                        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+                        Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                    } else
+                    {
+                        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
+                        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
+                        Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                    }
             }
         });
     }
@@ -123,4 +124,5 @@ public class ApnViewActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
 }

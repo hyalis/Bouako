@@ -29,12 +29,13 @@ public class XmlParser
         SAXBuilder sxb = new SAXBuilder();
         try
         {
+            Log.e("file" , context.getFilesDir().getPath());
             AssetManager assetManager = context.getResources().getAssets();
             InputStream file = assetManager.open("imageTypes.xml");
             OutputStream out = null;
 
             try {
-                out = new FileOutputStream(Environment.getExternalStorageDirectory().toString() + "/imageTypes.xml");
+                out = new FileOutputStream(context.getFilesDir().getPath() + "/imageTypes.xml");
 
                 byte[] buffer = new byte[65536 * 2];
                 int read;
@@ -53,7 +54,9 @@ public class XmlParser
 
             //On crée un nouveau document JDOM avec en argument le fichier XML
             //Le parsing est terminé ;)
-            File fileXml = new File(Environment.getExternalStorageDirectory().toString()+ "/imageTypes.xml");
+            //File fileXml = new File(Environment.getExternalStorageDirectory() + File.separator + "imageTypes.xml");
+
+            File fileXml = new java.io.File(context.getFilesDir().getPath()+ "/imageTypes.xml");
 
             document = sxb.build(fileXml);
         }

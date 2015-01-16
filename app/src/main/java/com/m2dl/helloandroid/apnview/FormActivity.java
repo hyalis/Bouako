@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -22,6 +23,8 @@ public class FormActivity extends Activity {
     public static int cptTouch = 0;
     public static int x, y, radiusValue;
     private BitmapFunction bf = new BitmapFunction();
+    private Switch typesSwitch;
+    private Switch valuesSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
         System.gc();
@@ -89,7 +92,37 @@ public class FormActivity extends Activity {
             }
         });
 
+
+        typesSwitch = (Switch) findViewById(R.id.type);
+        valuesSwitch = (Switch) findViewById(R.id.valeur);
+
+        // Set Animal & Plante
+        typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
+        typesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(1));
+
+        // Set -50/+50
+        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+
+        typesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked)
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                } else
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                }
+            }
+        });
     }
+
 
     public void redrawImg() {
         imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radiusValue);

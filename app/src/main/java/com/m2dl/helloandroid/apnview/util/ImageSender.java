@@ -27,7 +27,7 @@ public abstract class ImageSender {
 
     public File saveBitmapToFile(Bitmap image) {
 
-        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        String extStorageDirectory = context.getFilesDir().getPath();
         OutputStream outStream = null;
         Random r = new Random();
         String fileName = this.imageType.replace(" ", "_") +"_"+ r.nextInt(9999);
