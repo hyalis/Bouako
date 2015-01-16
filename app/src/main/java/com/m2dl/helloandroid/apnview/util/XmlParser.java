@@ -66,7 +66,6 @@ public class XmlParser
     }
 
     // Parse le fichier xml, et retourne les types, et sous types associés.
-    //
     public ArrayList<String> getTypesAndSousTypes()
     {
         //On crée une List contenant tous les noeuds "etudiant" de l'Element racine
@@ -83,8 +82,8 @@ public class XmlParser
         Element type1 = (Element) listTypes.get(0);
         Element type2 = (Element) listTypes.get(1);
 
-        String nomType1 = type1.getAttribute("title").toString();
-        String nomType2 = type2.getAttribute("title").toString();
+        String nomType1 = type1.getAttribute("title").getValue();
+        String nomType2 = type2.getAttribute("title").getValue();
 
         List sousTypes1 = type1.getChildren();
         List sousTypes2 = type2.getChildren();
@@ -94,11 +93,10 @@ public class XmlParser
             Log.e("XmlParser", "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 soustypes par type maxi !) ");
         }
 
-        String nomSousType11 = ((Element) sousTypes1.get(0)).getAttribute("title").toString();
-        String nomSousType12 = ((Element) sousTypes1.get(1)).getAttribute("title").toString();
-
-        String nomSousType21 = ((Element) sousTypes2.get(0)).getAttribute("title").toString();
-        String nomSousType22 = ((Element) sousTypes2.get(1)).getAttribute("title").toString();
+        String nomSousType11 = ((Element) sousTypes1.get(0)).getAttribute("title").getValue();
+        String nomSousType12 = ((Element) sousTypes1.get(1)).getAttribute("title").getValue();
+        String nomSousType21 = ((Element) sousTypes2.get(0)).getAttribute("title").getValue();
+        String nomSousType22 = ((Element) sousTypes2.get(1)).getAttribute("title").getValue();
 
         ArrayList<String> listTypesAndSousTypes = new ArrayList<String>();
         listTypesAndSousTypes.add(nomType1);

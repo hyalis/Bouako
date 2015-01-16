@@ -11,11 +11,18 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.app.Activity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.camera1.R;
+import com.m2dl.helloandroid.apnview.util.XmlParser;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ApnViewActivity extends Activity {
 
@@ -24,6 +31,9 @@ public class ApnViewActivity extends Activity {
     private BitmapFunction bf = new BitmapFunction();
     private LinearLayout apnPreview;
     private TextView message;
+
+    private Switch typesSwitch;
+    private Switch valuesSwitch;
 
 
     public static Camera isCameraAvailiable(){
@@ -64,10 +74,39 @@ public class ApnViewActivity extends Activity {
         showCamera = new ShowCamera(this, cameraObject);
         LinearLayout preview = (LinearLayout) findViewById(R.id.camera_preview);
         preview.addView(showCamera);
+
+        StaticData.imageTypesAndSousTypes = new XmlParser(ApnViewActivity.this).getTypesAndSousTypes();
+
+        typesSwitch = (Switch) findViewById(R.id.type);
+        valuesSwitch = (Switch) findViewById(R.id.valeur);
+
+        // Set Animal & Plante
+        typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
+        typesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(1));
+
+        // Set -50/+50
+        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+
+        typesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked)
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                } else
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                }
+                valuesSwitch.invalidate();
+            }
+        });
     }
+
     public void snapIt(View view){
-        //this.apnPreview.setVisibility(View.GONE);
-        //this.message.setText("Patientez...");
         ImageButton btnAPN = (ImageButton) findViewById(R.id.button_capture);
         btnAPN.setVisibility(View.INVISIBLE);
         cameraObject.takePicture(null, null, capturedIt);
