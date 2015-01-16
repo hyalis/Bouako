@@ -23,6 +23,7 @@
         android:maxSdkVersion="18" />
 
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -39,10 +40,12 @@
         </activity>
         <activity
             android:name="com.m2dl.helloandroid.apnview.FormActivity"
+            android:screenOrientation="portrait"
             android:label="FormActivity" >
         </activity>
         <activity
             android:name="com.m2dl.helloandroid.apnview.ApnViewActivity"
+            android:screenOrientation="portrait"
             android:label="ApnViewActivity" >
         </activity>
 

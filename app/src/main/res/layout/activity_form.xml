@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C5FFFC">
+    android:background="@drawable/back">
 
     <ImageView
         android:layout_width="450px"
@@ -19,7 +19,7 @@
         android:layout_gravity="right"
         android:onClick="restart"
         android:layout_marginTop="-91px"
-        android:layout_marginRight="45px"
+        android:layout_marginRight="47px"
         android:src="@drawable/restart"
         android:padding="7px"
         android:background="@null"
@@ -29,9 +29,14 @@
 
     <SeekBar
         android:layout_width="450px"
-        android:layout_height="wrap_content"
+        android:layout_height="50px"
         android:id="@+id/radius"
         android:layout_gravity="center_horizontal"
         android:max="5"
         android:layout_marginTop="20px" />
+
+    <include layout="@layout/imageinfos"
+        android:layout_marginTop="30px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </LinearLayout>

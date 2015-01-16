@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Switch
+        android:layout_width="450px"
+        android:switchMinWidth="450px"
+        android:thumbTextPadding="15px"
+        android:textOn="coucouClemHy"
+        android:textOff="jesuiscoucoup"
+        android:layout_height="wrap_content"
+        android:id="@+id/type"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5px" />
+
+    <Switch
+        android:layout_width="450px"
+        android:switchMinWidth="450px"
+        android:thumbTextPadding="75px"
+        android:layout_height="wrap_content"
+        android:id="@+id/valeur"
+        android:layout_below="@+id/type"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5px" />
+
+    <EditText
+        android:layout_width="450px"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:id="@+id/commentaire"
+        android:layout_below="@+id/valeur"
+        android:layout_alignRight="@+id/valeur"
+        android:layout_alignEnd="@+id/valeur"
+        android:layout_marginTop="5px"
+        android:background="#00000000"
+        android:hint="Commentaire..."
+        android:singleLine="true"
+        android:textColor="#ff000000"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        android:id="@+id/button"
+        android:layout_below="@+id/commentaire"
+        android:layout_alignRight="@+id/commentaire"
+        android:layout_alignEnd="@+id/commentaire"
+        android:layout_marginTop="5px" />
+
+
+
+
+</RelativeLayout>

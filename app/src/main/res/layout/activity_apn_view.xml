@@ -18,23 +18,29 @@
             android:layout_height="450px"
             android:padding="20dp"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal|top">
+            android:layout_gravity="center_horizontal">
 
         </LinearLayout>
         <ImageButton
             android:src="@drawable/camera"
             android:id="@+id/button_capture"
-            android:layout_width="100px"
-            android:layout_height="100px"
+            android:layout_width="75px"
+            android:layout_height="75px"
             android:onClick="snapIt"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginTop="-135px"
+            android:layout_marginTop="-122px"
             android:padding="7px"
             android:background="@null"
             android:scaleType="fitCenter"/>
 
     </LinearLayout>
 
+    <include layout="@layout/imageinfos"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="70px" />
+
+    <!--
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -43,6 +49,7 @@
         android:id="@+id/message"
         android:gravity="center"
         android:layout_gravity="center" />
+        -->
 
 
 </LinearLayout>

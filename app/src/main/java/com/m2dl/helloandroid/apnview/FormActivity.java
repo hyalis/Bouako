@@ -3,12 +3,14 @@ package com.m2dl.helloandroid.apnview;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.camera1.R;
 
@@ -16,7 +18,7 @@ public class FormActivity extends Activity {
     private Bitmap originalImg, imgBlur, imgCircle, imgFocus;
     private ImageView img;
     public static int cptTouch = 0;
-    public static int x, y, radius;
+    public static int x, y, radiusValue;
     private BitmapFunction bf = new BitmapFunction();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +27,19 @@ public class FormActivity extends Activity {
         setContentView(R.layout.activity_form);
         SeekBar sk = (SeekBar) findViewById(R.id.radius);
 
-        radius = 2;
-        sk.setProgress(radius);
+        radiusValue = 2;
+        sk.setProgress(radiusValue);
 
         x = 450/2;
         y = 450/2;
 
-        this.img = (ImageView) findViewById(R.id.img);
-        this.originalImg = StaticData.imgBitmap;
-        this.imgBlur = bf.fastblur(StaticData.imgBitmap, 25);
-        this.imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radius);
-        this.imgFocus = bf.overlay(imgBlur, imgCircle);
+        img = (ImageView) findViewById(R.id.img);
 
+        imgBlur = bf.fastblur(StaticData.imgBitmap, 25);
+        imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radiusValue);
+        imgFocus = bf.overlay(imgBlur, imgCircle);
         img.setImageBitmap(imgFocus);
+
 
         img.setOnTouchListener(new View.OnTouchListener()
         {
@@ -57,8 +59,7 @@ public class FormActivity extends Activity {
             }
         });
 
-        SeekBar radius = (SeekBar)findViewById(R.id.radius); // make seekbar object
-        radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        sk.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -78,7 +79,7 @@ public class FormActivity extends Activity {
                 // TODO Auto-generated method stub
                 Log.e("prog", "val = " + progress);
                 System.gc();
-                FormActivity.radius = progress;
+                FormActivity.radiusValue = progress;
                 redrawImg();
             }
         });
@@ -86,7 +87,7 @@ public class FormActivity extends Activity {
     }
 
     public void redrawImg() {
-        imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radius);
+        imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radiusValue);
         imgFocus = bf.overlay(imgBlur, imgCircle);
         img.setImageBitmap(imgFocus);
     }
