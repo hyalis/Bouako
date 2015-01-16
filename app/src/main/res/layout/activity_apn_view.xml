@@ -38,7 +38,7 @@
     <include layout="@layout/imageinfos"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="70px" />
+        android:layout_marginTop="50px" />
 
     <!--
     <TextView

@@ -12,6 +12,7 @@ import android.hardware.Camera.PictureCallback;
 import android.app.Activity;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -69,6 +70,12 @@ public class ApnViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apn_view);
+
+        EditText commEditText = (EditText)findViewById(R.id.commentaire);
+        commEditText.setVisibility(View.INVISIBLE);
+        ImageButton btnValidate = (ImageButton)findViewById(R.id.btnValidate);
+        btnValidate.setVisibility(View.INVISIBLE);
+
         this.apnPreview = (LinearLayout) findViewById(R.id.apnPreview);
         cameraObject = isCameraAvailiable();
         showCamera = new ShowCamera(this, cameraObject);

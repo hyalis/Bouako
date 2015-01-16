@@ -2,6 +2,7 @@ package com.m2dl.helloandroid.apnview;
 
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
