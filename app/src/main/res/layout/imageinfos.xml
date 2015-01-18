@@ -5,9 +5,7 @@
     <Switch
         android:layout_width="450px"
         android:switchMinWidth="450px"
-        android:thumbTextPadding="15px"
-        android:textOn="ok"
-        android:textOff="ko"
+        android:thumbTextPadding="50px"
         android:layout_height="40px"
         android:id="@+id/type"
         android:layout_alignParentTop="true"
@@ -15,10 +13,10 @@
         android:layout_marginTop="10px"
         />
 
-    <Switch
+    <com.m2dl.helloandroid.apnview.CustomSwitch
         android:layout_width="450px"
         android:switchMinWidth="450px"
-        android:thumbTextPadding="15px"
+        android:thumbTextPadding="50px"
         android:layout_height="40px"
         android:id="@+id/valeur"
         android:layout_below="@+id/type"

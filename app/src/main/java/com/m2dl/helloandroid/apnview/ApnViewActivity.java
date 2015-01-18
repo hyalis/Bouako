@@ -34,7 +34,7 @@ public class ApnViewActivity extends Activity {
     private TextView message;
 
     private Switch typesSwitch;
-    private Switch valuesSwitch;
+    private CustomSwitch valuesSwitch;
 
 
     public static Camera isCameraAvailiable(){
@@ -85,7 +85,8 @@ public class ApnViewActivity extends Activity {
         StaticData.imageTypesAndSousTypes = new XmlParser(ApnViewActivity.this).getTypesAndSousTypes();
 
         typesSwitch = (Switch) findViewById(R.id.type);
-        valuesSwitch = (Switch) findViewById(R.id.valeur);
+        this.valuesSwitch = (CustomSwitch)findViewById(R.id.valeur);
+
 
         // Set Animal & Plante
         typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
@@ -99,17 +100,19 @@ public class ApnViewActivity extends Activity {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(!isChecked)
-                    {
-                        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
-                        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
-                        Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                    } else
-                    {
-                        valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
-                        valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
-                        Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                    }
+                if(!isChecked)
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                } else
+                {
+                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
+                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
+                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+                }
+                valuesSwitch.setActivated(false);valuesSwitch.setActivated(true);
+                valuesSwitch.requestLayout();
             }
         });
     }

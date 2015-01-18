@@ -24,7 +24,7 @@ public class FormActivity extends Activity {
     public static int x, y, radiusValue;
     private BitmapFunction bf = new BitmapFunction();
     private Switch typesSwitch;
-    private Switch valuesSwitch;
+    private CustomSwitch valuesSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
         System.gc();
@@ -94,7 +94,7 @@ public class FormActivity extends Activity {
 
 
         typesSwitch = (Switch) findViewById(R.id.type);
-        valuesSwitch = (Switch) findViewById(R.id.valeur);
+        valuesSwitch = (CustomSwitch) findViewById(R.id.valeur);
 
         // Set Animal & Plante
         typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
@@ -119,6 +119,8 @@ public class FormActivity extends Activity {
                     valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
                     Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
                 }
+                valuesSwitch.setActivated(false);valuesSwitch.setActivated(true);
+                valuesSwitch.requestLayout();
             }
         });
     }
