@@ -91,28 +91,27 @@ public class ApnViewActivity extends Activity {
         // Set Animal & Plante
         typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
         typesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(1));
+        typesSwitch.setChecked(StaticData.switchTypeIsSelected);
 
         // Set -50/+50
         valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
         valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+        updateSwitch(StaticData.switchTypeIsSelected);
+        valuesSwitch.setChecked(StaticData.switchSousTypeIsSelected);
 
         typesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked)
-                {
-                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
-                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
-                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                } else
-                {
-                    valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
-                    valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
-                    Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
-                }
-                valuesSwitch.setActivated(false);valuesSwitch.setActivated(true);
-                valuesSwitch.requestLayout();
+                StaticData.switchTypeIsSelected = isChecked;
+                updateSwitch(isChecked);
+            }
+        });
+
+        valuesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                StaticData.switchSousTypeIsSelected = isChecked;
             }
         });
     }
@@ -121,6 +120,21 @@ public class ApnViewActivity extends Activity {
         ImageButton btnAPN = (ImageButton) findViewById(R.id.button_capture);
         btnAPN.setVisibility(View.INVISIBLE);
         cameraObject.takePicture(null, null, capturedIt);
+    }
+
+    public void updateSwitch(boolean isChecked){
+        if(!isChecked)
+        {
+            valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
+            valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
+            Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+        } else
+        {
+            valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
+            valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
+            Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
+        }
+        valuesSwitch.requestLayout();
     }
 
     @Override

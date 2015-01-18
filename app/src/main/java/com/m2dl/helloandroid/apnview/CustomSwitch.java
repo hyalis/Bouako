@@ -28,5 +28,7 @@ public class CustomSwitch extends Switch {
             Log.e("OK", ex.getMessage(), ex);
         }
         super.requestLayout();
+        this.setActivated(false);
+        this.setActivated(true);
     }
 }
