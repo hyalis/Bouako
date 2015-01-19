@@ -1,13 +1,11 @@
-package com.m2dl.helloandroid.apnview.util;
+package com.m2dl.helloandroid.apnview.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class ImageSender {

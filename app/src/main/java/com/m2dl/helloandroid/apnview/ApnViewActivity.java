@@ -2,7 +2,6 @@ package com.m2dl.helloandroid.apnview;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import android.graphics.Bitmap;
@@ -19,11 +18,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.camera1.R;
-import com.m2dl.helloandroid.apnview.util.XmlParser;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Random;
+import com.m2dl.helloandroid.apnview.utils.BitmapFunction;
+import com.m2dl.helloandroid.apnview.utils.CustomSwitch;
+import com.m2dl.helloandroid.apnview.utils.ShowCamera;
+import com.m2dl.helloandroid.apnview.utils.StaticData;
+import com.m2dl.helloandroid.apnview.utils.XmlParser;
 
 public class ApnViewActivity extends Activity {
 
@@ -31,8 +30,9 @@ public class ApnViewActivity extends Activity {
     private ShowCamera showCamera;
     private BitmapFunction bf = new BitmapFunction();
     private LinearLayout apnPreview;
-    private TextView message;
 
+    // Composants graphiques
+    private TextView message;
     private Switch typesSwitch;
     private CustomSwitch valuesSwitch;
 
@@ -71,29 +71,32 @@ public class ApnViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apn_view);
 
+        // Récupération des composants graphiques
         EditText commEditText = (EditText)findViewById(R.id.commentaire);
-        commEditText.setVisibility(View.INVISIBLE);
         ImageButton btnValidate = (ImageButton)findViewById(R.id.btnValidate);
-        btnValidate.setVisibility(View.INVISIBLE);
-
         this.apnPreview = (LinearLayout) findViewById(R.id.apnPreview);
-        cameraObject = isCameraAvailiable();
-        showCamera = new ShowCamera(this, cameraObject);
         LinearLayout preview = (LinearLayout) findViewById(R.id.camera_preview);
-        preview.addView(showCamera);
-
-        StaticData.imageTypesAndSousTypes = new XmlParser(ApnViewActivity.this).getTypesAndSousTypes();
-
-        typesSwitch = (Switch) findViewById(R.id.type);
+        this.typesSwitch = (Switch) findViewById(R.id.type);
         this.valuesSwitch = (CustomSwitch)findViewById(R.id.valeur);
 
+        // On met en invisible les boutons inutiles pour cette vue
+        commEditText.setVisibility(View.INVISIBLE);
+        btnValidate.setVisibility(View.INVISIBLE);
 
-        // Set Animal & Plante
+        cameraObject = isCameraAvailiable();
+        showCamera = new ShowCamera(this, cameraObject);
+        preview.addView(showCamera);
+
+        // Parse le fichier xml et stocke les types et sous types
+        StaticData.imageTypesAndSousTypes = new XmlParser(ApnViewActivity.this).getTypesAndSousTypes();
+
+
+        // Modification du texte des sliders en fonction du fichier xml lu, ici les types
         typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
         typesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(1));
         typesSwitch.setChecked(StaticData.switchTypeIsSelected);
 
-        // Set -50/+50
+        // Modification du texte des sliders en fonction du fichier xml lu, ici les sous-types
         valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
         valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
         updateSwitch(StaticData.switchTypeIsSelected);
@@ -117,7 +120,7 @@ public class ApnViewActivity extends Activity {
     }
 
     public void snapIt(View view){
-        ImageButton btnAPN = (ImageButton) findViewById(R.id.button_capture);
+        ImageButton btnAPN = (ImageButton) findViewById(R.id.button_capture); // TODO peut mieux faire ?
         btnAPN.setVisibility(View.INVISIBLE);
         cameraObject.takePicture(null, null, capturedIt);
     }
@@ -127,12 +130,10 @@ public class ApnViewActivity extends Activity {
         {
             valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(2));
             valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(3));
-            Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
         } else
         {
             valuesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(4));
             valuesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(5));
-            Log.e("","ON= "+valuesSwitch.getTextOn() + " OFF = " + valuesSwitch.getTextOff());
         }
         valuesSwitch.requestLayout();
     }

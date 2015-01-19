@@ -1,4 +1,4 @@
-package com.m2dl.helloandroid.apnview;
+package com.m2dl.helloandroid.apnview.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Typeface;

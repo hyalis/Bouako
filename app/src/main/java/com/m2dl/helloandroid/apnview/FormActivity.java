@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -20,11 +19,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.camera1.R;
-import com.m2dl.helloandroid.apnview.util.ImageSenderMail;
+import com.m2dl.helloandroid.apnview.utils.BitmapFunction;
+import com.m2dl.helloandroid.apnview.utils.CustomSwitch;
+import com.m2dl.helloandroid.apnview.utils.ImageSenderMail;
+import com.m2dl.helloandroid.apnview.utils.StaticData;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

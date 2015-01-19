@@ -1,4 +1,4 @@
-package com.m2dl.helloandroid.apnview.util;
+package com.m2dl.helloandroid.apnview.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,8 +6,6 @@ import android.util.Log;
 
 import com.kristijandraca.backgroundmaillibrary.BackgroundMail;
 import com.kristijandraca.backgroundmaillibrary.Utils;
-
-import java.util.ArrayList;
 
 public class ImageSenderMail extends ImageSender {
 

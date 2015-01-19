@@ -1,4 +1,4 @@
-package com.m2dl.helloandroid.apnview;
+package com.m2dl.helloandroid.apnview.utils;
 
 /**
  * Created by Hyalis on 15/01/2015.

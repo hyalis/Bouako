@@ -1,9 +1,9 @@
-package com.m2dl.helloandroid.apnview.util;
+package com.m2dl.helloandroid.apnview.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -21,15 +21,17 @@ public class XmlParser
 {
     static Document document;
     static Element racine;
+    private Context context;
     private String LOG_TAG = "XMLPARSER";
 
     public XmlParser(Context context)
     {
+        this.context = context;
         //On crée une instance de SAXBuilder
         SAXBuilder sxb = new SAXBuilder();
         try
         {
-            Log.e("file" , context.getFilesDir().getPath());
+            Log.d("file" , context.getFilesDir().getPath());
             AssetManager assetManager = context.getResources().getAssets();
             InputStream file = assetManager.open("imageTypes.xml");
             OutputStream out = null;
@@ -78,7 +80,7 @@ public class XmlParser
         if(listTypes.size() > 2)
         {
             Log.e("XmlParser", "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 types maxi !) ");
-            //Toast.makeText(FullscreenActivity.class, "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 types maxi !) ", Toast.LENGTH_LONG);
+            Toast.makeText(context, "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 types maxi !) ", Toast.LENGTH_LONG).show();
         }
 
         //Premier type et ses sous types:
@@ -94,6 +96,8 @@ public class XmlParser
         if(sousTypes1.size() > 2 || sousTypes2.size() > 2)
         {
             Log.e("XmlParser", "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 soustypes par type maxi !) ");
+            Toast.makeText(context, "LE FICHIER XML D'ENTREE NE RESPECTE PAS LA DOC (2 soustypes par type maxi !) ", Toast.LENGTH_LONG).show();
+
         }
 
         String nomSousType11 = ((Element) sousTypes1.get(0)).getAttribute("title").getValue();
@@ -109,7 +113,7 @@ public class XmlParser
         listTypesAndSousTypes.add(nomSousType21);
         listTypesAndSousTypes.add(nomSousType22);
 
-        Log.e("XMLPARSER", "LISTE DES TYPES : \n"+ listTypesAndSousTypes.toString());
+        Log.d("XMLPARSER", "LISTE DES TYPES : \n"+ listTypesAndSousTypes.toString());
         return listTypesAndSousTypes;
     }
 

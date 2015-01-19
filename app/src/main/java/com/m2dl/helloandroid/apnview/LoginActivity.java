@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.camera1.R;
+import com.m2dl.helloandroid.apnview.utils.StaticData;
 
 public class LoginActivity extends Activity {
     private ImageButton confirm;
@@ -38,7 +37,7 @@ public class LoginActivity extends Activity {
                 //Toast.makeText(LoginActivity.this, "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
                 //new XmlParser(LoginActivity.this).getTypesAndSousTypes();
                 StaticData.login = ((EditText)findViewById(R.id.login)).getText().toString();
-                Log.e("Login", "Login user = " + StaticData.login);
+                Log.d("Login", "Login user = " + StaticData.login);
                 Intent intent = new Intent(LoginActivity.this, ApnViewActivity.class);
                 startActivity(intent);
                 finish();
