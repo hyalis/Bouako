@@ -1,14 +1,13 @@
 package com.m2dl.helloandroid.apnview;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
-import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;

@@ -4,14 +4,12 @@ package com.m2dl.helloandroid.apnview.utils;
  * Created by Hyalis on 15/01/2015.
  */
 
-        import java.io.IOException;
+import android.content.Context;
+import android.hardware.Camera;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
-        import android.content.Context;
-        import android.hardware.Camera;
-        import android.view.Display;
-        import android.view.SurfaceHolder;
-        import android.view.SurfaceView;
-        import android.view.WindowManager;
+import java.io.IOException;
 
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
