@@ -7,6 +7,7 @@ import android.os.Environment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class ImageSender {
@@ -23,7 +24,7 @@ public abstract class ImageSender {
         imageType = type;
     }
 
-    public abstract void sendImage();
+    public abstract void sendImage(String login, String date, String position, String commentaire);
 
     public File saveBitmapToFile(Bitmap image) {
 

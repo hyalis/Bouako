@@ -18,4 +18,6 @@ public class StaticData {
     public static ArrayList<String> imageTypesAndSousTypes = new ArrayList<String>();
     public static boolean switchTypeIsSelected = false;
     public static boolean switchSousTypeIsSelected = false;
+    public static String lastLocation;
+
 }
