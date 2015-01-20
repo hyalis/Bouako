@@ -76,20 +76,6 @@ public class FormActivity extends Activity {
 
         // Gestion de la position
         locationManager = (LocationManager) FormActivity.this.getSystemService(Context.LOCATION_SERVICE);
-      /*  mLocationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                StaticData.lastLocation = df.format(location.getLatitude()) + " / " + df.format(location.getLongitude());
-                Log.d("LOCATION", "LOCATION CHANGED :"+ StaticData.lastLocation);
-            }
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            @Override
-            public void onProviderEnabled(String provider) {}
-            @Override
-            public void onProviderDisabled(String provider) {}
-        };*/
-
 
         mLocationListener = new LocationListener() {
 
@@ -99,22 +85,18 @@ public class FormActivity extends Activity {
 
             @Override
             public void onProviderEnabled(String provider) {
-                Toast.makeText(FormActivity.this,
-                        "Provider enabled: " + provider, Toast.LENGTH_SHORT)
-                        .show();
+
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-                Toast.makeText(FormActivity.this,
-                        "Provider disabled: " + provider, Toast.LENGTH_SHORT)
-                        .show();
+
             }
 
             @Override
             public void onLocationChanged(Location location) {
                 // Do work with new location. Implementation of this method will be covered later.
-                StaticData.lastLocation = df.format(location.getLatitude()) + " / " + df.format(location.getLongitude());
+                StaticData.lastLocation = df.format(location.getLatitude()) + "; " + df.format(location.getLongitude());
                 Log.d("LOCATION", "LOCATION CHANGED :"+ StaticData.lastLocation);
                 Toast.makeText(FormActivity.this, "Found your location, you can send the picture now ! ;-)", Toast.LENGTH_LONG).show();
 
@@ -122,23 +104,31 @@ public class FormActivity extends Activity {
         };
 
         locationManager.requestLocationUpdates(getProviderName(), 5000, 0, mLocationListener);
-        //  locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
 
         // Gestion du clic sur le bouton submit
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Si le téléphone n'as pas accès à internet: on informe l'user
                 if(!isOnline()){
                     Toast.makeText(FormActivity.this, "Message not sent : device is offline !", Toast.LENGTH_LONG).show();
-
-                } else if (StaticData.lastLocation == null) {
+                } else if (StaticData.lastLocation == null)  // s'il n'y a pas encore de localisation (gps ou reseau)
+                {
+                    // On récup la derniere localisation enregistrée
                     Location l = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                    // Si elle existe, on l'utilise pour envoyer le mail.
                     if(l != null) {
-                        StaticData.lastLocation = df.format(l.getLatitude()) + " / " + df.format(l.getLongitude());
+                        StaticData.lastLocation = df.format(l.getLatitude()) + "; " + df.format(l.getLongitude());
                         Toast.makeText(FormActivity.this, "No precise location found, using last known location.", Toast.LENGTH_LONG).show();
                         sendImageByMail();
-                    } else {
-                        Toast.makeText(FormActivity.this, "Message not sent : No location found. Please wait until gps fixes.", Toast.LENGTH_LONG).show();
+                    } else { // Sinon on ne fait rien et on informe l'utilisateur
+
+                        if(!locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ))
+                            Toast.makeText(FormActivity.this, "Message not sent : No location found. Please enable GPS!", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(FormActivity.this, "Message not sent : No location found. Please wait until GPS fixes.", Toast.LENGTH_LONG).show();
+
                     }
                 } else {
                     sendImageByMail();
@@ -182,7 +172,6 @@ public class FormActivity extends Activity {
             }
         });
 
-
         // Set Animal & Plante
         typesSwitch.setTextOff(StaticData.imageTypesAndSousTypes.get(0));
         typesSwitch.setTextOn(StaticData.imageTypesAndSousTypes.get(1));
@@ -190,7 +179,6 @@ public class FormActivity extends Activity {
 
         updateSwitch(StaticData.switchTypeIsSelected);
         valuesSwitch.setChecked(StaticData.switchSousTypeIsSelected);
-
 
         typesSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -209,10 +197,18 @@ public class FormActivity extends Activity {
         });
     }
 
+    /**
+     * Envoie l'image avec les infos associées par mail
+     */
     private void sendImageByMail() {
-        String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
-        String type = getTypeChoosen();
-        new ImageSenderMail(FormActivity.this, imgFocus, type).sendImage(StaticData.login, date, StaticData.lastLocation, commentaire.getText().toString());
+        try {
+            String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
+            String type = getTypeChoosen();
+            new ImageSenderMail(FormActivity.this, imgFocus, type).sendImage(StaticData.login, date, StaticData.lastLocation, commentaire.getText().toString());
+        } catch (Exception e)
+        {
+            Log.e("ERROR sendImageByMail", e.toString());
+        }
     }
 
 

@@ -32,7 +32,7 @@ public class ImageSenderMail extends ImageSender {
             bm.setMailTo(EMAIL);
             //bm.setFormSubject("New image uploaded to biodiversity android : "+ this.imageType);
 
-            bm.setFormSubject("\""+ login + "\" uploaded a \"" + this.imageType + "\" the " + date + " at \"" + position + "\" with commentary  : " + commentaire);
+            bm.setFormSubject("\""+ login + "\" uploaded a \"" + this.imageType + "\" the " + date + " at (" + position + ") with commentary  : " + commentaire);
 
             bm.setFormBody("Commentaire :" + commentaire);
             bm.setSendingMessage("Sending image to android biodiversity mail database...");

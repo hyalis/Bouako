@@ -35,36 +35,6 @@ public class ApnViewActivity extends Activity {
     private Switch typesSwitch;
     private CustomSwitch valuesSwitch;
 
-
-    public static Camera isCameraAvailiable(){
-        Camera object = null;
-        try {
-            object = Camera.open();
-        }
-        catch (Exception e){
-        }
-        return object;
-    }
-
-    private PictureCallback capturedIt = new PictureCallback() {
-
-        @Override
-        public void onPictureTaken(final byte[] data, Camera camera) {
-
-            Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
-            StaticData.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
-            StaticData.imgBitmap = bf.rotateBitmap(StaticData.imgBitmap, 90);
-
-            cameraObject.release();
-
-            Intent intent = new Intent(ApnViewActivity.this, FormActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-            finish();
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +52,7 @@ public class ApnViewActivity extends Activity {
         commEditText.setVisibility(View.INVISIBLE);
         btnValidate.setVisibility(View.INVISIBLE);
 
-        cameraObject = isCameraAvailiable();
+        cameraObject = isCameraAvailable();
         showCamera = new ShowCamera(this, cameraObject);
         preview.addView(showCamera);
 
@@ -117,6 +87,37 @@ public class ApnViewActivity extends Activity {
             }
         });
     }
+
+
+    public static Camera isCameraAvailable(){
+        Camera object = null;
+        try {
+            object = Camera.open();
+        }
+        catch (Exception e){
+        }
+        return object;
+    }
+
+    private PictureCallback capturedIt = new PictureCallback() {
+
+        @Override
+        public void onPictureTaken(final byte[] data, Camera camera) {
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
+            StaticData.imgBitmap = bf.getResizedBitmap(bitmap, 450, 450);
+            StaticData.imgBitmap = bf.rotateBitmap(StaticData.imgBitmap, 90);
+
+            cameraObject.release();
+
+            Intent intent = new Intent(ApnViewActivity.this, FormActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            finish();
+        }
+    };
+
 
     public void snapIt(View view){
         ImageButton btnAPN = (ImageButton) findViewById(R.id.button_capture); // TODO peut mieux faire ?
