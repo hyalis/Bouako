@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FormActivity extends Activity {
-    private Bitmap originalImg, imgBlur, imgCircle, imgFocus;
+    private Bitmap imgBlur, imgCircle, imgFocus;
     public static int cptTouch = 0;
     public static int x, y, radiusValue;
     private BitmapFunction bf = new BitmapFunction();
@@ -66,7 +66,7 @@ public class FormActivity extends Activity {
         // Ajout d'un Typeface à l'EditText de commentaire
         commentaire.setTypeface(StaticData.myTypeface);
 
-        //
+        // Initialisation du cercle focus
         radiusValue = 2;
         sk.setProgress(radiusValue);
         x = 450/2;
@@ -209,7 +209,7 @@ public class FormActivity extends Activity {
     }
 
     /**
-     * Compute la nouvelle image à afficher (superposition d'une image flou, et d'une image en cercle non floue
+     * Compute la nouvelle image à afficher (superposition d'une image flou, et d'une image en cercle non floue)
      */
     public void redrawImg() {
         imgCircle = bf.getCroppedBitmap(StaticData.imgBitmap, x, y, radiusValue);

@@ -31,11 +31,6 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
-
-
-                //Toast.makeText(LoginActivity.this, "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
-                //new XmlParser(LoginActivity.this).getTypesAndSousTypes();
                 StaticData.login = ((EditText)findViewById(R.id.login)).getText().toString();
                 Log.d("Login", "Login user = " + StaticData.login);
                 Intent intent = new Intent(LoginActivity.this, ApnViewActivity.class);
