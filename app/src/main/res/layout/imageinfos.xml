@@ -13,7 +13,7 @@
         android:layout_marginTop="10px"
         />
 
-    <com.m2dl.helloandroid.apnview.CustomSwitch
+    <com.m2dl.helloandroid.apnview.utils.CustomSwitch
         android:layout_width="450px"
         android:switchMinWidth="450px"
         android:thumbTextPadding="50px"
