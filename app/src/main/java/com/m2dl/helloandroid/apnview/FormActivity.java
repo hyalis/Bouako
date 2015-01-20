@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -75,7 +76,7 @@ public class FormActivity extends Activity {
 
         // Gestion de la position
         locationManager = (LocationManager) FormActivity.this.getSystemService(Context.LOCATION_SERVICE);
-        mLocationListener = new LocationListener() {
+      /*  mLocationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 StaticData.lastLocation = df.format(location.getLatitude()) + " / " + df.format(location.getLongitude());
@@ -87,8 +88,41 @@ public class FormActivity extends Activity {
             public void onProviderEnabled(String provider) {}
             @Override
             public void onProviderDisabled(String provider) {}
+        };*/
+
+
+        mLocationListener = new LocationListener() {
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                Toast.makeText(FormActivity.this,
+                        "Provider enabled: " + provider, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Toast.makeText(FormActivity.this,
+                        "Provider disabled: " + provider, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onLocationChanged(Location location) {
+                // Do work with new location. Implementation of this method will be covered later.
+                StaticData.lastLocation = df.format(location.getLatitude()) + " / " + df.format(location.getLongitude());
+                Log.d("LOCATION", "LOCATION CHANGED :"+ StaticData.lastLocation);
+                Toast.makeText(FormActivity.this, "Found your location, you can send the picture now ! ;-)", Toast.LENGTH_LONG).show();
+
+            }
         };
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
+
+        locationManager.requestLocationUpdates(getProviderName(), 5000, 0, mLocationListener);
+        //  locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
 
         // Gestion du clic sur le bouton submit
         submitBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,16 +132,16 @@ public class FormActivity extends Activity {
                     Toast.makeText(FormActivity.this, "Message not sent : device is offline !", Toast.LENGTH_LONG).show();
 
                 } else if (StaticData.lastLocation == null) {
-                    Toast.makeText(FormActivity.this, "Message not sent : No location found. Please retry !", Toast.LENGTH_LONG).show();
                     Location l = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    if(l != null)
+                    if(l != null) {
                         StaticData.lastLocation = df.format(l.getLatitude()) + " / " + df.format(l.getLongitude());
+                        Toast.makeText(FormActivity.this, "No precise location found, using last known location.", Toast.LENGTH_LONG).show();
+                        sendImageByMail();
+                    } else {
+                        Toast.makeText(FormActivity.this, "Message not sent : No location found. Please wait until gps fixes.", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-
-                    String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
-                    String type = getTypeChoosen();
-                    new ImageSenderMail(FormActivity.this, imgFocus, type).sendImage(StaticData.login, date, StaticData.lastLocation, commentaire.getText().toString());
-
+                    sendImageByMail();
                 }
 
             }
@@ -175,6 +209,33 @@ public class FormActivity extends Activity {
         });
     }
 
+    private void sendImageByMail() {
+        String date = new SimpleDateFormat("dd/MM/yy").format(new Date());
+        String type = getTypeChoosen();
+        new ImageSenderMail(FormActivity.this, imgFocus, type).sendImage(StaticData.login, date, StaticData.lastLocation, commentaire.getText().toString());
+    }
+
+
+    /**
+     * Get the best provider name.
+     * @return Name of best suiting provider.
+     * */
+    String getProviderName() {
+        LocationManager locationManager = (LocationManager) this
+                .getSystemService(Context.LOCATION_SERVICE);
+
+        Criteria criteria = new Criteria();
+        criteria.setPowerRequirement(Criteria.POWER_HIGH); // Chose your desired power consumption level.
+        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM); // Choose your accuracy requirement.
+        criteria.setSpeedRequired(true); // Chose if speed for first location fix is required.
+        criteria.setAltitudeRequired(false); // Choose if you use altitude.
+        criteria.setBearingRequired(false); // Choose if you use bearing.
+        criteria.setCostAllowed(true); // Choose if this provider can waste money :-)
+
+        // Provide your criteria and flag enabledOnly that tells
+        // LocationManager only to return active providers.
+        return locationManager.getBestProvider(criteria, true);
+    }
     /**
      * Check si le device est connecté à internet
      * @return true si le device est connecté
