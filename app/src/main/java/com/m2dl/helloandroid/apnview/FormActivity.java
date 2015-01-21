@@ -42,6 +42,7 @@ public class FormActivity extends Activity {
     // Utilitaires pour le GPS
     private LocationListener mLocationListener;
     private LocationManager locationManager;
+    private boolean gpsToastAlreadyFired = false;
 
     // Elements graphiques
     private Switch typesSwitch;
@@ -98,7 +99,11 @@ public class FormActivity extends Activity {
                 // Do work with new location. Implementation of this method will be covered later.
                 StaticData.lastLocation = df.format(location.getLatitude()) + "; " + df.format(location.getLongitude());
                 Log.d("LOCATION", "LOCATION CHANGED :"+ StaticData.lastLocation);
-                Toast.makeText(FormActivity.this, "Found your location, you can send the picture now ! ;-)", Toast.LENGTH_LONG).show();
+                if (!gpsToastAlreadyFired)
+                {
+                    Toast.makeText(FormActivity.this, "Found your location, you can send the picture now ! ;-)", Toast.LENGTH_SHORT).show();
+                    gpsToastAlreadyFired = true;
+                }
 
             }
         };
